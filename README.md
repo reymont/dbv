@@ -8,7 +8,13 @@ Check out the **[project website](http://dbv.vizuina.com)** for more details, fe
 [![dbv.php](http://dbv.vizuina.com/img/screenshot-main.png)](http://dbv.vizuina.com)
 
 
+## 修改内容
+
+取消了revisions中只列出数据的版本
+
 ## revisions
+
+
 
 在[dbv]/data/revisions 目录下，新建子目录，子目录中包含.sql文件。
 
