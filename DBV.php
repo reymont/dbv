@@ -140,8 +140,9 @@ class DBV
 
     public function revisionsAction()
     {
-        $revisions = isset($_POST['revisions']) ? array_filter($_POST['revisions'], 'is_numeric') : array();
+        $revisions = isset($_POST['revisions']) ? $_POST['revisions'] : array();
         $current_revision = $this->_getCurrentRevision();
+        $return = $revisions;
 
         if (count($revisions)) {
             sort($revisions);
@@ -183,7 +184,7 @@ class DBV
 
     public function saveRevisionFileAction()
     {
-        $revision = intval($_POST['revision']);
+        $revision = $_POST['revision'];
         if (preg_match('/^[a-z0-9\._]+$/i', $_POST['file'])) {
             $file = $_POST['file'];
         } else {
@@ -324,12 +325,11 @@ class DBV
         $return = array();
 
         foreach (new DirectoryIterator(DBV_REVISIONS_PATH) as $file) {
-            if ($file->isDir() && !$file->isDot() && is_numeric($file->getBasename())) {
+            if ($file->isDir() && !$file->isDot() ) {
                 $return[] = $file->getBasename();
             }
         }
-
-        rsort($return, SORT_NUMERIC);
+        // rsort($return, SORT_NUMERIC);
 
         return $return;
     }
@@ -340,7 +340,7 @@ class DBV
             case 'FILE':
                 $file = DBV_META_PATH . DS . 'revision';
                 if (file_exists($file)) {
-                    return intval(file_get_contents($file));
+                    return file_get_contents($file);
                 }
                 return 0;
                 break;

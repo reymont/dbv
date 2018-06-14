@@ -118,7 +118,7 @@ class DBV_Adapter_MySQL extends DBV_Adapter_PDO
 
         $result = $this->query($sql);
 
-        return intval($result->fetchColumn());
+        return $result->fetchColumn();
     }
 
     public function setCurrentRevision($revision)
